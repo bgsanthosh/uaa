@@ -60,7 +60,7 @@ public class DefaultConfigurationTestSuite extends UaaBaseSuite {
         webApplicationContext.setEnvironment(mockEnvironment);
         webApplicationContext.setServletContext(new MockServletContext());
         new YamlServletProfileInitializerContextInitializer().initializeContext(webApplicationContext, "uaa.yml,login.yml,required_configuration.yml");
-        webApplicationContext.setConfigLocation("file:./src/main/webapp/WEB-INF/spring-servlet.xml");
+        webApplicationContext.setConfigLocation("file:/Users/pivotal/workspace/uaa/uaa/src/main/webapp/WEB-INF/spring-servlet.xml");
         webApplicationContext.refresh();
         webApplicationContext.registerShutdownHook();
 

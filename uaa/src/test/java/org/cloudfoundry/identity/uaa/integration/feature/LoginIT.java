@@ -147,6 +147,18 @@ public class LoginIT {
     }
 
     @Test
+    public void testSuccessfulLoginNewUser() throws Exception {
+        String newUserEmail = createAnotherUser();
+
+        webDriver.get(baseUrl + "/login");
+        assertEquals("Cloud Foundry", webDriver.getTitle());
+        attemptLogin(newUserEmail, "sec3Tas");
+        assertThat(webDriver.findElement(By.cssSelector("h1")).getText(), Matchers.containsString("Where to?"));
+        assertThat(webDriver.findElement(By.cssSelector(".footer")).getText(), Matchers.containsString("Last Login"));
+        IntegrationTestUtils.validateAccountChooserCookie(baseUrl, webDriver);
+    }
+
+    @Test
     public void testNoZoneFound() throws Exception {
         assumeTrue("Expected testzone1/2/3/4/doesnotexist.localhost to resolve to 127.0.0.1", doesSupportZoneDNS());
         webDriver.get(baseUrl.replace("localhost","testzonedoesnotexist.localhost") + "/login");
